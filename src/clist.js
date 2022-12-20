@@ -13,7 +13,7 @@ function CompanyList() {
 
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);
-    setShow(true);
+    setShow(true); 
   }
 
   function getList(){
