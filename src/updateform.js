@@ -42,7 +42,7 @@ function Updateform(props) {
         "resetPasswordToken": null
       }
       setLoad(true);
-      fetch("https://tomcat1.shiftescape.com/api/users",{
+      fetch(`https://tomcat1.shiftescape.com/api/users/edit/${props.id}`,{
         method : "POST",
         headers: {
           "Accept": "application/json",

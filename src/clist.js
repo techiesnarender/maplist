@@ -22,6 +22,7 @@ function CompanyList() {
   const [updateAddress,setUpdateAddress] = useState("")
   const [updateLatitude,setUpdateLatitude] = useState();
   const [updateLongitude,setUpdateLongitude] = useState("")
+  const [id,setId] = useState()
   /*---------------------props------------------------*/
 
   function handleShow(breakpoint, item) {
@@ -36,6 +37,7 @@ function CompanyList() {
     setUpdateAddress(item.address)
     setUpdateLatitude(item.latitude)
     setUpdateLongitude(item.longitude)
+    setId(item.id)
   }
 
   function getList() {
@@ -53,6 +55,7 @@ function CompanyList() {
   }
 
   function deleteUser(id) {
+    getList()
     fetch(`https://tomcat1.shiftescape.com/api/users/delete/${id}`, {
       method: "POST"
     }).then((response) => {
@@ -61,20 +64,20 @@ function CompanyList() {
 
   }
 
-
-
   useEffect(() => {
     setLoad(true);
     getList();
     deleteUser();
   }, [])
 
+  
   return (<>
     <Container fluid>
       <Row>
         <Col>
         
-       {/* <input type="text" value={data[0].contactname} onChange={(e)=>console.log(e.target.value)}/> */}
+      
+
           <h1 className="text-center mt-4">Company List</h1>
           <Table striped bordered hover size="sm">
             <thead>
@@ -129,6 +132,7 @@ function CompanyList() {
       </Modal.Header>
       <Modal.Body>
         <Updateform
+        id={id}
         name={contactname}
         password={updatePassword}
         email={updateEmail}
