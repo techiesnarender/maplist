@@ -108,6 +108,15 @@ function Updateform(props) {
       zoom: 13,
       mapTypeId: "roadmap",
     });
+
+    new google.maps.Marker({
+        position: { lat: lats, lng: lans },
+        map,
+        title: "Hello World!",
+      });
+
+
+
     // Create the search box and link it to the UI element.
     const input = document.getElementById("pac-input");
     const searchBox = new google.maps.places.SearchBox(input);
@@ -206,12 +215,12 @@ function Updateform(props) {
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="validationCustom01">
                 
-                <Form.Label>First name</Form.Label>
+                <Form.Label>First name {name}</Form.Label>
                 <Form.Control
                   required
                   type="text"
                   placeholder="First name"
-                  value={props.latitude}
+                 
                   defaultValue={props.name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -223,7 +232,7 @@ function Updateform(props) {
                   required
                   type="email"
                   placeholder="Last name"
-                  value={props.email}
+                 // value={props.email}
                   defaultValue={props.email}
                   onChange={(e) => setMail(e.target.value)}
                 />
@@ -238,8 +247,8 @@ function Updateform(props) {
                     placeholder="Password"
                     aria-describedby="inputGroupPrepend"
                     required
-                    value={props.password}
-                 // defaultValue={props.password}
+                 //   value={props.password}
+                  defaultValue={props.password}
                     onChange={(e)=>setPassword(e.target.value)}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -254,7 +263,7 @@ function Updateform(props) {
                 <Form.Control
                  type="text"
                  placeholder="Company Name"
-                 value={props.company}
+                // value={props.company}
                  defaultValue={props.company}
                  required
                  onChange={(e)=>setCompnany(e.target.value)}
@@ -265,14 +274,24 @@ function Updateform(props) {
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom04">
                 <Form.Label>Opening Hour's</Form.Label>
-                <Form.Control type="time" placeholder="Opening Hour's" required onChange={(e)=>setOpen(e.target.value)} value={props.open}  defaultValue={props.open}/>
+                <Form.Control
+                type="time"
+                placeholder="Opening Hour's"
+                required onChange={(e)=>setOpen(e.target.value)}
+              //  value={props.open} 
+                defaultValue={props.open}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Opening Hour's.
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom05">
                 <Form.Label>Closes Hour's</Form.Label>
-                <Form.Control type="time" placeholder="Closes Hour's" required onChange={(e)=>setClose(e.target.value)} value={props.close} defaultValue={props.close}/>
+                <Form.Control
+                type="time"
+                placeholder="Closes Hour's"
+                required onChange={(e)=>setClose(e.target.value)}
+                //value={props.close}
+                defaultValue={props.close}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Closes Hour's.
                 </Form.Control.Feedback>
@@ -281,7 +300,13 @@ function Updateform(props) {
             <Row>
               <Form.Group as={Col} md="12" controlId="validationCustom05">
                 <Form.Label>Address </Form.Label>
-                <Form.Control id="pac-input" type="text" placeholder="Address " required onChange={(e)=>setAddress(e.target.value)} value={props.address} defaultValue={props.address}/>
+                <Form.Control
+                id="pac-input"
+                type="text"
+                placeholder="Address "
+                required onChange={(e)=>setAddress(e.target.value)}
+               // value={props.address}
+                defaultValue={props.address}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Address .
                 </Form.Control.Feedback>

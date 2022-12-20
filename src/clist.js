@@ -73,6 +73,8 @@ function CompanyList() {
     <Container fluid>
       <Row>
         <Col>
+        
+       {/* <input type="text" value={data[0].contactname} onChange={(e)=>console.log(e.target.value)}/> */}
           <h1 className="text-center mt-4">Company List</h1>
           <Table striped bordered hover size="sm">
             <thead>
@@ -143,9 +145,7 @@ function CompanyList() {
           <Button variant="secondary" onClick={handlesClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handlesClose}>
-            Save Changes
-          </Button>
+        
         </Modal.Footer>
     </Modal>
   </>)
