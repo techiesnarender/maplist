@@ -1,4 +1,4 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState} from "react";
 import { Container, Row, Col, Button } from "react-bootstrap"
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
@@ -6,38 +6,62 @@ import Updateform from "./updateform";
 
 function CompanyList() {
   const [data, setdata] = useState([]);
-  const [load,setLoad] = useState(false)
+  const [load, setLoad] = useState(false)
   const values = [true];
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+  const handlesClose = () => setShow(false);
+  const handlesShow = () => setShow(true);
+  /*---------------------props------------------------*/
+  const [contactname, setContactname] = useState("");
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updatePassword,setUpdatePassword] = useState("");
+  const [updatCompany,setUpdatCompany] = useState("");
+  const [updateOpen,setUpdateOpen] = useState("");
+  const [updateClose,setUpdateClose] = useState("")
+  const [updateAddress,setUpdateAddress] = useState("")
+  const [updateLatitude,setUpdateLatitude] = useState();
+  const [updateLongitude,setUpdateLongitude] = useState("")
+  /*---------------------props------------------------*/
 
-  function handleShow(breakpoint) {
+  function handleShow(breakpoint, item) {
     setFullscreen(breakpoint);
-    setShow(true); 
+    setShow(true);
+    setContactname(item.contactname)
+    setUpdateEmail(item.email)
+    setUpdatePassword(item.password)
+    setUpdatCompany(item.company)
+    setUpdateOpen(item.open)
+    setUpdateClose(item.close)
+    setUpdateAddress(item.address)
+    setUpdateLatitude(item.latitude)
+    setUpdateLongitude(item.longitude)
   }
 
-  function getList(){
+  function getList() {
     fetch("https://tomcat1.shiftescape.com/api/users").then((response) => {
       setLoad(false);
       response.json().then(((result) => {
         //console.log(result)
         setdata(result);
-        
+
       }))
     }).catch(e => {
-     // console.log(e);
+      // console.log(e);
       setLoad(false);
     });
   }
 
-  function deleteUser(id){
-    fetch(`https://tomcat1.shiftescape.com/api/users/delete/${id}`,{
-      method:"POST"
-    }).then((response)=>{
+  function deleteUser(id) {
+    fetch(`https://tomcat1.shiftescape.com/api/users/delete/${id}`, {
+      method: "POST"
+    }).then((response) => {
       console.log(response)
     })
 
   }
+
+
 
   useEffect(() => {
     setLoad(true);
@@ -53,8 +77,8 @@ function CompanyList() {
           <Table striped bordered hover size="sm">
             <thead>
               <tr>
-              <th>ID</th>
-              <th>S.No</th>
+                <th>ID</th>
+                <th>S.No</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Company  Name</th>
@@ -64,35 +88,28 @@ function CompanyList() {
               </tr>
             </thead>
             {load && (
-                <span className="spinner-border spinner-border-sm"></span>
-              )}
+              <span className="spinner-border spinner-border-sm"></span>
+            )}
             <tbody>
               {
                 data.map((item, index) =>
 
                   <tr key={index}>
-                     <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{item.id}</td>
                     <td>{item.contactname}</td>
                     <td>{item.email}</td>
                     <td>{item.company}</td>
-                    <td>{item.address}</td>
+                    <td width="30%">{item.address}</td>
                     <td>{item.open} - {item.close}</td>
-                    <td><Button onClick={()=>deleteUser(item.id)}>Delete</Button> <span>&nbsp;</span>
-                    {values.map((v, idx) => (
-        <Button key={idx} className="me-2" onClick={() => handleShow(v)}>
-          Update
-          {typeof v === 'string' && `below ${v.split('-')[0]}`}
-        </Button>
-      ))}
-      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Updateform/>
-        </Modal.Body>
-      </Modal>
+                    <td><Button onClick={() => deleteUser(item.id)}>Delete</Button> <span>&nbsp;</span>
+                      {values.map((v, idx) => (
+                        <Button key={index} className="me-2" onClick={() => handleShow(v, item)}>
+                          Update
+                          {typeof v === 'string' && `below ${v.split('-')[0]}`}
+                        </Button>
+                      ))}
+
                     </td>
                   </tr>
                 )
@@ -102,8 +119,35 @@ function CompanyList() {
         </Col>
 
       </Row>
-    
+
     </Container>
+    <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Update Registration</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Updateform
+        name={contactname}
+        password={updatePassword}
+        email={updateEmail}
+        address={updateAddress}
+        open={updateOpen}
+        close={updateClose}
+        company={updatCompany}
+        latitude={updateLatitude}
+        longitude={updateLongitude}
+        />
+
+      </Modal.Body>
+      <Modal.Footer>
+          <Button variant="secondary" onClick={handlesClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handlesClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+    </Modal>
   </>)
 }
 

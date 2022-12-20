@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
-function Updateform() {
+function Updateform(props) {
 
   const [validated, setValidated] = useState(false);
   const [name, setName] = useState("");
@@ -96,11 +96,14 @@ function Updateform() {
     * Copyright 2019 Google LLC. All Rights Reserved.
     * SPDX-License-Identifier: Apache-2.0
     */
+   var lats = parseFloat(props.latitude);
+   var lans = parseFloat(props.longitude)
+  // alert(lats)
   function initAutocomplete() {
     const map = new google.maps.Map(document.getElementById("map"), {
       center: {
-        lat: -33.8688,
-        lng: 151.2195
+        lat: lats,
+        lng: lans
       },
       zoom: 13,
       mapTypeId: "roadmap",
@@ -156,7 +159,7 @@ function Updateform() {
         markers.push(
           new google.maps.Marker({
             map,
-            //icon,
+            icon,
             title: place.name,
             position: place.geometry.location,
             draggable: true,
@@ -198,7 +201,7 @@ function Updateform() {
     <Container>
       <Row>
         <Col>
-          <h1 className='mt-4 text-center'>Update Registration</h1>
+          
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -208,7 +211,8 @@ function Updateform() {
                   required
                   type="text"
                   placeholder="First name"
-                  defaultValue="Mark"
+                  value={props.latitude}
+                  defaultValue={props.name}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -219,7 +223,8 @@ function Updateform() {
                   required
                   type="email"
                   placeholder="Last name"
-                  defaultValue="Otto"
+                  value={props.email}
+                  defaultValue={props.email}
                   onChange={(e) => setMail(e.target.value)}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -233,6 +238,8 @@ function Updateform() {
                     placeholder="Password"
                     aria-describedby="inputGroupPrepend"
                     required
+                    value={props.password}
+                 // defaultValue={props.password}
                     onChange={(e)=>setPassword(e.target.value)}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -247,6 +254,8 @@ function Updateform() {
                 <Form.Control
                  type="text"
                  placeholder="Company Name"
+                 value={props.company}
+                 defaultValue={props.company}
                  required
                  onChange={(e)=>setCompnany(e.target.value)}
                  />
@@ -256,14 +265,14 @@ function Updateform() {
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom04">
                 <Form.Label>Opening Hour's</Form.Label>
-                <Form.Control type="time" placeholder="Opening Hour's" required onChange={(e)=>setOpen(e.target.value)} />
+                <Form.Control type="time" placeholder="Opening Hour's" required onChange={(e)=>setOpen(e.target.value)} value={props.open}  defaultValue={props.open}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Opening Hour's.
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom05">
                 <Form.Label>Closes Hour's</Form.Label>
-                <Form.Control type="time" placeholder="Closes Hour's" required onChange={(e)=>setClose(e.target.value)}/>
+                <Form.Control type="time" placeholder="Closes Hour's" required onChange={(e)=>setClose(e.target.value)} value={props.close} defaultValue={props.close}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Closes Hour's.
                 </Form.Control.Feedback>
@@ -272,7 +281,7 @@ function Updateform() {
             <Row>
               <Form.Group as={Col} md="12" controlId="validationCustom05">
                 <Form.Label>Address </Form.Label>
-                <Form.Control id="pac-input" type="text" placeholder="Address " required onChange={(e)=>setAddress(e.target.value)}/>
+                <Form.Control id="pac-input" type="text" placeholder="Address " required onChange={(e)=>setAddress(e.target.value)} value={props.address} defaultValue={props.address}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid Address .
                 </Form.Control.Feedback>
