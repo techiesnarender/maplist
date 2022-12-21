@@ -76,8 +76,12 @@ function CompanyList() {
       <Row>
         <Col>
         
+<<<<<<< Updated upstream
       
 
+=======
+       <input type="text" value={data[0].contactname} onChange={(e)=> e.target.value}/>
+>>>>>>> Stashed changes
           <h1 className="text-center mt-4">Company List</h1>
           <Table striped bordered hover size="sm">
             <thead>
@@ -126,7 +130,7 @@ function CompanyList() {
       </Row>
 
     </Container>
-    <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+    <Modal show={show} onHide={() => setShow(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Update Registration</Modal.Title>
       </Modal.Header>
