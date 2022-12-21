@@ -68,20 +68,15 @@ function CompanyList() {
     setLoad(true);
     getList();
     deleteUser();
-  }, [])
+  }, [id])
 
   
   return (<>
     <Container fluid>
       <Row>
         <Col>
-        
-<<<<<<< Updated upstream
-      
+       {/* <input type="text" value={data[0].contactname} onChange={(e)=> e.target.value}/> */}
 
-=======
-       <input type="text" value={data[0].contactname} onChange={(e)=> e.target.value}/>
->>>>>>> Stashed changes
           <h1 className="text-center mt-4">Company List</h1>
           <Table striped bordered hover size="sm">
             <thead>
