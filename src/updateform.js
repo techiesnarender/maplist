@@ -235,6 +235,7 @@ function Updateform(props) {
                  // value={props.email}
                   defaultValue={props.email}
                   onChange={(e) => setMail(e.target.value)}
+                  disabled
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
