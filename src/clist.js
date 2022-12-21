@@ -55,10 +55,12 @@ function CompanyList() {
   }
 
   function deleteUser(id) {
+    setLoad(true);
     getList()
     fetch(`https://tomcat1.shiftescape.com/api/users/delete/${id}`, {
       method: "POST"
     }).then((response) => {
+      setLoad(false);
       console.log(response)
     })
 
@@ -78,6 +80,9 @@ function CompanyList() {
        {/* <input type="text" value={data[0].contactname} onChange={(e)=> e.target.value}/> */}
 
           <h1 className="text-center mt-4">Company List</h1>
+          {load && (
+              <span className="spinner-border" style={{ position: "fixed", zIndex:"1031", top:"50%", left: "50%", transform: "initial" }}></span>
+            )}
           <Table striped bordered hover size="sm">
             <thead>
               <tr>
@@ -91,9 +96,6 @@ function CompanyList() {
                 <th>Action</th>
               </tr>
             </thead>
-            {load && (
-              <span className="spinner-border spinner-border-sm"></span>
-            )}
             <tbody>
               {
                 data.map((item, index) =>
