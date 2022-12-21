@@ -1,7 +1,7 @@
 /*global google*/
 import React, { useState, useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import Button from '@mui/material/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -290,7 +290,7 @@ function Registration() {
                 onChange={(e)=>setCheck(e.target.value)}
               />
             </Form.Group>
-            <Button onClick={sub}>
+            <Button variant="contained" onClick={sub}>
             {load && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

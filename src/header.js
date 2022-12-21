@@ -12,7 +12,6 @@ function Header(){
           <Nav className="me-auto">
             <Link className='nav-link' to="/">Registration</Link>
             <Link className='nav-link' to="/companyList">Company List</Link>
-            <Link className='nav-link' to="/updateform">Update Form</Link>
             <Link className='nav-link' to="/search">Company Search</Link>
            </Nav>
         </Container>

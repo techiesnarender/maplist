@@ -68,7 +68,7 @@ function CompanyList() {
     setLoad(true);
     getList();
     deleteUser();
-  }, [])
+  }, [id])
 
   
   return (<>
