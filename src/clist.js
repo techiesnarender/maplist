@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Updateform from "./updateform";
+import { DataGrid } from '@mui/x-data-grid';
 
 function CompanyList() {
   const [data, setdata] = useState([]);
@@ -24,6 +25,19 @@ function CompanyList() {
   const [updateLongitude,setUpdateLongitude] = useState("")
   const [id,setId] = useState()
   /*---------------------props------------------------*/
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'contactname', headerName: 'Name', width: 250 },
+    { field: 'email', headerName: 'Email', width: 250 },
+    { field: 'company', headerName: 'Company Name', width: 250 },
+    { field: 'address', headerName: 'Address', width: 250 },
+    { field: 'open', headerName: 'Time', width: 130 },
+    { field: 'action', headerName: 'Action', width: 130 },
+  ]
+
+
+
 
   function handleShow(breakpoint, item) {
     setFullscreen(breakpoint);
@@ -75,7 +89,14 @@ function CompanyList() {
     <Container fluid>
       <Row>
         <Col>
+        <DataGrid
+        rows={data}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
         
+      />
       
 
           <h1 className="text-center mt-4">Company List</h1>
